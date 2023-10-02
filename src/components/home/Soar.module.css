@@ -1,0 +1,31 @@
+.soar {
+    padding-top: 70px;
+    padding-bottom: 45px;
+}
+
+.soar-content {
+    max-width: 1016px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.soar-content p {
+    font-size: 27px;
+    margin-top: 31px;
+}
+
+@media (max-width: 1199.98px) {
+    .soar {
+        padding-top: 50px;
+    }
+    .soar-content p {
+        font-size: 24px;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .soar-content p {
+        font-size: 22px;
+    }
+}

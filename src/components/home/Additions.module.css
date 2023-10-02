@@ -1,0 +1,31 @@
+.additions {
+    padding: 40px 0;
+    margin-top: 69px;
+    margin-bottom: 43px;
+}
+
+.additions__grid {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+@media (max-width: 1199.98px) {
+    .additions {
+        margin: 40px 0;
+    }
+    .additions__grid {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .additions {
+        padding: 20px 0;
+    }
+    .additions__grid {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+}

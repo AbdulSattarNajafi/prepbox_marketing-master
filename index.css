@@ -1,0 +1,222 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    src: local(Inter-Regular), local('Inter-Regular'),
+        url(https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap)
+            format('ttf');
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    src: local(Inter-Medium), local('Inter-Medium'),
+        url(https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap)
+            format('ttf');
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    src: local(Inter-SemiBold), local('Inter-SemiBold'),
+        url(https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap)
+            format('ttf');
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    src: local(Inter-Bold), local('Inter-Bold'),
+        url(https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap)
+            format('ttf');
+    font-display: swap;
+}
+
+body {
+    background-color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    color: #343434;
+    font-weight: 400;
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 0;
+    margin: 0;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    border: none;
+    background-color: transparent;
+    font-family: inherit;
+    transition: all 0.25s;
+    cursor: pointer;
+}
+button:focus {
+    outline: none;
+    box-shadow: unset;
+}
+
+h1 {
+    font-size: 51px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+h2 {
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+h3 {
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.secondary-title {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 140%;
+}
+
+.container {
+    max-width: 1264px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.text-blue {
+    color: #398fe5;
+}
+
+.header-shadow {
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.11);
+}
+
+.slick-dots li button {
+    width: 18px;
+    height: 18px;
+    background: #a4cbf3;
+    border: 2px solid #fefefe;
+    border-radius: 50%;
+}
+
+.slick-dots .slick-active button {
+    background-color: #398fe5;
+}
+
+.slick-dots li button:before {
+    display: none;
+}
+
+.active-plans-card {
+    background-color: #ebf4fc !important;
+}
+
+@media (max-width: 1199.98px) {
+    .secondary-title {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 991.98px) {
+    h1 {
+        font-size: 46px;
+    }
+
+    h2 {
+        font-size: 38px;
+    }
+
+    .secondary-title {
+        font-size: 28px;
+    }
+
+    h3 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    h1 {
+        font-size: 40px;
+    }
+
+    h2 {
+        font-size: 34px;
+    }
+    .secondary-title {
+        font-size: 26px;
+    }
+    .container {
+        padding: 0 16px;
+    }
+
+    .slick-dots li {
+        width: 16px;
+        height: 16px;
+        margin: 0 3px;
+    }
+
+    .slick-dots li button {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    h1 {
+        font-size: 36px;
+    }
+    h2 {
+        font-size: 26px;
+    }
+    .secondary-title {
+        font-size: 24px;
+    }
+    h3 {
+        font-size: 22px;
+    }
+}

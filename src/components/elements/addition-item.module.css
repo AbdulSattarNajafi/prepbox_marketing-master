@@ -1,0 +1,49 @@
+.addition {
+    display: flex;
+    align-items: center;
+    padding: 7px;
+}
+
+.addition__icon {
+    width: 74px;
+    margin-right: 16px;
+    line-height: 1;
+}
+
+.addition__icon svg {
+    width: 70%;
+    height: auto;
+}
+
+.addition h4 {
+    flex: 1;
+    font-size: 24px;
+    font-weight: 520;
+    line-height: 29px;
+}
+
+@media (max-width: 1199.98px) {
+    .addition {
+        padding: 0 5px;
+    }
+    .addition__icon {
+        width: 60px;
+    }
+    .addition h4 {
+        font-size: 18px;
+        line-height: 25px;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .addition__icon {
+        width: 50px;
+        margin-right: 10px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .addition__icon {
+        width: 46px;
+    }
+}

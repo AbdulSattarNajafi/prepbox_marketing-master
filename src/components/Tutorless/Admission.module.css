@@ -1,0 +1,46 @@
+.space {
+    padding-bottom: 50px;
+}
+.admission-text {
+    text-align: center;
+    font-size: 18px;
+    color: #343434;
+    margin-bottom: 30px;
+}
+
+.admission__universities {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.admission__universities li {
+    display: flex;
+    align-items: center;
+    line-height: 1;
+}
+
+@media (max-width: 991.98px) {
+    .admission__universities {
+        max-width: 80%;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .admission-text {
+        font-size: 12px;
+    }
+    
+    .admission__universities {
+        flex-flow: row wrap;
+        max-width: 100%;
+        gap: 16px;
+    }
+
+    .admission__universities li {
+        width: 82px;
+    }
+}

@@ -1,0 +1,130 @@
+.post {
+    padding-top: 144px;
+    margin-bottom: 100px;
+}
+
+.post-container {
+    max-width: 810px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.post__card-image img {
+    width: 50%;
+    /* height: 228px; */
+    object-fit: cover;
+    display: flex;
+    justify-content: center;
+}
+
+.post__card-body {
+    padding: 24px 0;
+}
+
+.post__card-body h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.post__card-body h4 {
+    font-size: 18px;
+    color: #398fe5;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.post__card-body h5,
+.post__card-body p {
+    color: #000;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.post__card-body p {
+    font-weight: 400;
+}
+
+.post__card-body .post__card-caption {
+    font-size: 18px;
+    color: #a2a2a2;
+    margin-top: 6px;
+    margin-bottom: 14px;
+}
+
+.post__error {
+    text-align: center;
+}
+
+.post__error p {
+    max-width: 540px;
+    font-size: 20px;
+    color: #777777;
+    margin: 10px auto 20px auto;
+}
+
+.post__error button {
+    display: inline-block;
+    background-color: #398fe5;
+    border: 1px solid #398fe5;
+    border-radius: 30px;
+    font-size: 18px;
+    line-height: 1.4;
+    font-weight: 700;
+    color: #fefefe;
+    padding: 8px 20px;
+    transition: all 0.25s;
+}
+
+.post__error button:hover {
+    color: #398fe5;
+    background-color: transparent;
+}
+
+@media (max-width: 991.98px) {
+    .post {
+        margin-bottom: 80px;
+    }
+    
+    .post__card-body p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .post-container {
+        padding: 0 16px;
+    }
+
+    .post__card-body p {
+        font-size: 14px;
+    }
+
+    .post__card-image img {
+        width: 100%;
+        /* height: 228px; */
+        object-fit: cover;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .post__error p {
+        font-size: 16px;
+    }
+
+    .post__card-body p {
+        font-size: 14px;
+    }
+
+    .post__card-image img {
+        width: 100%;
+        /* height: 228px; */
+        object-fit: cover;
+        display: flex;
+        justify-content: center;
+    }
+}

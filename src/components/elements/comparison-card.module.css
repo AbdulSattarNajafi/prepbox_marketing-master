@@ -1,0 +1,154 @@
+.card {
+    width: 100%;
+    background: #ffffff;
+    box-shadow: 0px 4px 34px rgba(0, 0, 0, 0.08);
+    border-radius: 24px;
+    padding: 20px;
+}
+
+.card.active {
+    box-shadow: 0px 4px 34px rgba(0, 0, 0, 0.16);
+}
+
+.card__content {
+    padding: 20px 9px;
+}
+
+.card__content-title {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 29px;
+    letter-spacing: -0.72px;
+    margin-bottom: 10px;
+}
+
+.card__content-title h4 {
+    align-items: center;
+}
+.card__content-image {
+    padding: 0px 50px;
+    align-items: center;
+}
+
+.card__content-session {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 20px;
+}
+
+.card__content-price {
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 29px;
+    letter-spacing: -0.72px;
+    color: #4098f9;
+}
+
+.card__list {
+    list-style: none;
+    margin: 0;
+    padding: 30px 0;
+}
+
+.card__list li {
+    display: flex;
+    align-items: center;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 40px;
+    color: #4098f9;
+}
+
+.card__list li.blur {
+    opacity: 0.5;
+    color: #263238;
+}
+
+.card__list li span {
+    color: #263238;
+    margin-left: 11px;
+}
+
+.card-btn {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    background-color: #f2f2f2;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.48px;
+    color: #263238;
+    padding: 8px;
+    transition: all 0.3s ease;
+}
+
+.card-btn:hover,
+.card-btn.card-btn-active {
+    color: #ffffff;
+    background-color: #4098f9;
+}
+
+@media (max-width: 1199.98px) {
+    .card__list {
+        padding: 60px 0;
+    }
+    .card__content-title {
+        font-size: 30px;
+        margin-bottom: 30px;
+    }
+
+    .card__content-session {
+        margin-bottom: 40px;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .card__list {
+        padding: 40px 0;
+    }
+
+    .card__content-title {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+    .card__content-price {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .card {
+        padding: 15px;
+    }
+
+    .card__content-image {
+        padding: 0px 10px;
+        align-items: center;
+    }
+
+    .card__content {
+        padding: 10px;
+    }
+    .card__content-title {
+        font-size: 26px;
+        margin-bottom: 15px;
+    }
+    .card__content-session {
+        font-size: 14px;
+        line-height: 20px;
+        margin-bottom: 30px;
+    }
+    .card__content-price {
+        font-size: 26px;
+    }
+    .card__list {
+        padding: 30px 0;
+    }
+    .card__list li span {
+        font-size: 13px;
+    }
+}
+
