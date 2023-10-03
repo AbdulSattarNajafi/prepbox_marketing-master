@@ -1,84 +1,109 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import React, { useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
+import Loader from '../elements/loader';
 import classes from './Bookcover.module.css';
 import axios from 'axios';
 
 const BookCover = () => {
-    const [Book, setBook] = useState('');
-    const [Chapters, setChapters] = useState([])
-    const [Materials, setMaterials] = useState([])
-    const { bookName, materialName } = useParams();
-
+    const [Chapters, setChapters] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
+    const { bookName } = useParams();
     const navigate = useNavigate();
-    
-    const getBook = async () => {
-        try {
-            axios.get("http://localhost:8880/book").then(response => {
-            setBook(response.data);
-            // console.log(Book.chapters)
-        })
-        } catch (err) {
-            console.log('error while getting books', err)   
-        }
-    }
+    const [cookie, setCookie] = useCookies();
 
-    const getChapters = async () => {
-        try {
-            axios.get("http://localhost:8880/chapters").then(response => {
-            setChapters(response.data)
-            setMaterials(response.data.materials)
-            console.log(response.data)
-        })
-        } catch (err) {
-            console.log('error while getting books', err)   
-        }
-    }
+    const bookId = cookie.__book_id;
 
     useEffect(() => {
-        getBook()
-        getChapters()
-        console.log(Book)
-        console.log(Materials)
-        console.log(bookName)
-      },[]);
+        const getChapters = async () => {
+            try {
+                setIsLoading(true);
+                setError('');
+                const response = await axios.get(
+                    `https://app.prepanywhere.com/api/stu/static_books/all_chapters?id=${bookId}`
+                );
+                setChapters(response.data);
+            } catch (error) {
+                if (error.response) {
+                    setError('No Data Found!');
+                } else if (error.request) {
+                    setError('Network Error');
+                } else {
+                    setError('Something went wrong, Please try again!');
+                }
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        getChapters();
+    }, [bookId]);
+
+    const navigationHandler = (url, id) => {
+        navigate(url);
+        setCookie('__chapter_id', id);
+    };
 
     return (
         <div className={classes.section}>
-            <div className={classes.header}> 
-                <h1> {Book.name} </h1>
+            <div className={classes.header}>
+                <h1> {bookName.replace(/-/g, ' ')} </h1>
             </div>
             <div className={classes.container}>
-                <div>
-                    {Chapters.map((chapter) => {
-                        return (
-                            <div>
-                                <div className={classes.chapterTitle} >
-                                    <h2>{chapter.name}</h2>
-                                </div>
-                            <ul className={classes.chapterContainer}>
-                                <div className={classes.chapterTextContainer}> 
-                                    <li key={chapter.id} className={classes.listItem}>
-                                        <div className={classes.materialWrapper}>
-                                                <div className={classes.material}>
-                                                    {chapter.materials.map((material) => {
+                {isLoading && <Loader />}
+
+                {error && <p className='error-message'>{error}</p>}
+
+                {!error && !isLoading && (
+                    <div>
+                        {Chapters.map((chapter) => {
+                            return (
+                                <div
+                                    key={chapter.id}
+                                    onClick={() =>
+                                        navigationHandler(
+                                            chapter.name.replace(/ /g, '-'),
+                                            chapter.id
+                                        )
+                                    }
+                                >
+                                    <div className={classes.chapterTitle}>
+                                        <h2>{chapter.name}</h2>
+                                    </div>
+                                    <ul className={classes.chapterContainer}>
+                                        <div className={classes.chapterTextContainer}>
+                                            <li className={classes.listItem}>
+                                                <div className={classes.materialWrapper}>
+                                                    <div className={classes.material}>
+                                                        {chapter.materials.map((material) => {
                                                             return (
-                                                                <div onClick={()=> {
-                                                                        navigate(material.name.replace(/ /g,"-"))}
-                                                                        }>
-                                                                    <p key={material.id}>{material.name}</p>
+                                                                <div
+                                                                    key={material.id}
+                                                                    // onClick={() =>
+                                                                    //     navigationHandler(
+                                                                    //         material.name.replace(
+                                                                    //             / /g,
+                                                                    //             '-'
+                                                                    //         ),
+                                                                    //         material.id
+                                                                    //     )
+                                                                    // }
+                                                                >
+                                                                    <p>{material.name}</p>
                                                                 </div>
                                                             );
                                                         })}
+                                                    </div>
                                                 </div>
+                                            </li>
                                         </div>
-                                    </li>
+                                    </ul>
                                 </div>
-                        </ul>
-                        </div>
-                        );
-                    })}
-                </div>
+                            );
+                        })}
+                    </div>
+                )}
             </div>
         </div>
     );
