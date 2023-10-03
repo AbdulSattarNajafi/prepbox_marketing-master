@@ -1,15 +1,19 @@
 import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import classes from './book-card.module.css';
 
-const BookCard = ({ name, image }) => {
+const BookCard = ({ name, image, id }) => {
     const navigate = useNavigate();
-    console.log(name)
-    const nameURL = name.replace(/ /g,"-");
+    const nameURL = name.replace(/ /g, '-');
+
+    // eslint-disable-next-line no-unused-vars
+    const [cookie, setCookie] = useCookies();
+
     const bookHandler = () => {
-        console.log(nameURL)
         if (nameURL) {
             navigate(`${nameURL}`);
+            setCookie('__book_id', id);
         }
     };
 
