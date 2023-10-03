@@ -13,7 +13,6 @@ const MaterialPage = () => {
     const [cookie] = useCookies();
 
     const chapterId = cookie.__chapter_id;
-    // `https://app.prepanywhere.com/api/stu/static_books/question_details?id=051fb175-ed70-4e5d-96c0-9ba453b5377a`
 
     useEffect(() => {
         const getQuestions = async () => {

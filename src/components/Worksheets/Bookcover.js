@@ -11,7 +11,8 @@ const BookCover = () => {
     const [error, setError] = useState('');
     const { bookName } = useParams();
     const navigate = useNavigate();
-    const [cookie, setCookie] = useCookies();
+    const [cookie] = useCookies(['__book_id']);
+    const [chapterCookie, setChapterCookie] = useCookies(['__chapter_id']);
 
     const bookId = cookie.__book_id;
 
@@ -42,7 +43,7 @@ const BookCover = () => {
 
     const navigationHandler = (url, id) => {
         navigate(url);
-        setCookie('__chapter_id', id);
+        setChapterCookie('__chapter_id', id);
     };
 
     return (

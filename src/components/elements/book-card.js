@@ -8,7 +8,7 @@ const BookCard = ({ name, image, id }) => {
     const nameURL = name.replace(/ /g, '-');
 
     // eslint-disable-next-line no-unused-vars
-    const [cookie, setCookie] = useCookies();
+    const [cookie, setCookie] = useCookies(['__book_id']);
 
     const bookHandler = () => {
         if (nameURL) {
