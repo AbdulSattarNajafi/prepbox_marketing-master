@@ -51,9 +51,10 @@
 }
 
 .solution-video {
-    width: auto; 
+    width: auto;
     height: auto;
     height: 450px;
+    margin-top: 16px;
 }
 
 .post__error {
@@ -91,9 +92,9 @@
     }
 
     .solution-video {
-        height: 500px
+        height: 500px;
     }
-    
+
     .solution-body p {
         font-size: 16px;
     }
@@ -103,22 +104,21 @@
     .solution-container {
         padding: 0 16px;
     }
-    
+
     .solution-video {
-        height: 460px
+        height: 460px;
     }
-    
+
     .solution-body p {
         font-size: 14px;
     }
-
 }
 
 @media (max-width: 575.98px) {
     .solution-video {
-        height: 400px
+        height: 400px;
     }
-    
+
     .post__error p {
         font-size: 16px;
     }

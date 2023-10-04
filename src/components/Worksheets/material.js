@@ -1,5 +1,4 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
 import React, { useState, useEffect } from 'react';
 import classes from './Bookcover.module.css';
 import axios from 'axios';
@@ -9,18 +8,17 @@ const MaterialPage = () => {
     const [Questions, setQuestions] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
-    const { chapterName } = useParams();
-    const [cookie] = useCookies();
-
-    const chapterId = cookie.__chapter_id;
+    const { materialName } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
+        const materialId = localStorage.getItem('__material_id');
         const getQuestions = async () => {
             try {
                 setIsLoading(true);
                 setError('');
                 const response = await axios.get(
-                    `https://app.prepanywhere.com/api/stu/static_books/question_details?id=${chapterId}`
+                    `https://app.prepanywhere.com/api/stu/static_books/all_questions?id=${materialId}`
                 );
                 setQuestions(response.data);
             } catch (error) {
@@ -36,13 +34,19 @@ const MaterialPage = () => {
             }
         };
 
-        getQuestions();
-    }, [chapterId]);
+        if (materialId) {
+            getQuestions();
+        }
+    }, []);
+
+    const questionNavigationHandler = (url) => {
+        navigate(url);
+    };
 
     return (
         <div className={classes.section}>
             <div className={classes.header}>
-                <h1>{chapterName.replace(/-/g, ' ')}</h1>
+                <h3>{materialName.replace(/-/g, ' ')}</h3>
             </div>
             <div className={classes.container}>
                 {isLoading && <Loader />}
@@ -50,14 +54,21 @@ const MaterialPage = () => {
                 {error && <p className='error-message'>{error}</p>}
                 {!error && !isLoading && (
                     <div>
-                        <ul>
-                            {/* {Questions?.map((question) => {
-                            return (
-                                <div>
-                                    <li> {question.uuid} </li>
-                                </div>
-                            );
-                        })} */}
+                        <ul className={classes.materialList}>
+                            {Questions.length > 0 ? (
+                                Questions?.map((question) => {
+                                    return (
+                                        <li
+                                            onClick={() => questionNavigationHandler(question.uuid)}
+                                            key={question.uuid}
+                                        >
+                                            {question.uuid}{' '}
+                                        </li>
+                                    );
+                                })
+                            ) : (
+                                <p className='text-center text-blue'>Qustions Not Found!</p>
+                            )}
                         </ul>
                     </div>
                 )}

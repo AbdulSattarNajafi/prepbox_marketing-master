@@ -15,6 +15,7 @@ import SolutionVideo from './pages/SolutionVideo';
 import Worksheet from './pages/Worksheet';
 import BookLvl1 from './pages/BookCover';
 import Material from './pages/Material';
+import SolutionDetail from './components/Solution/solution-detail';
 
 const router = createBrowserRouter([
     {
@@ -27,7 +28,8 @@ const router = createBrowserRouter([
             { path: 'blog', element: <Blog /> },
             { path: 'worksheets', element: <Worksheet /> },
             { path: 'worksheets/:bookName', element: <BookLvl1 /> },
-            { path: 'worksheets/:bookName/:chapterName', element: <Material /> },
+            { path: 'worksheets/:bookName/:materialName', element: <Material /> },
+            { path: 'worksheets/:bookName/:materialName/:questionId', element: <SolutionDetail /> },
 
             { path: 'support', element: <SupportPage /> },
             { path: 'product/prepbox-ai', element: <Tutorless /> },
