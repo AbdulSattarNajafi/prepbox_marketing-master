@@ -1,6 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
 import Loader from '../elements/loader';
 import classes from './Bookcover.module.css';
 import axios from 'axios';
@@ -11,12 +10,9 @@ const BookCover = () => {
     const [error, setError] = useState('');
     const { bookName } = useParams();
     const navigate = useNavigate();
-    const [cookie] = useCookies(['__book_id']);
-    const [chapterCookie, setChapterCookie] = useCookies(['__chapter_id']);
-
-    const bookId = cookie.__book_id;
 
     useEffect(() => {
+        const bookId = localStorage.getItem('__book_id');
         const getChapters = async () => {
             try {
                 setIsLoading(true);
@@ -38,12 +34,14 @@ const BookCover = () => {
             }
         };
 
-        getChapters();
-    }, [bookId]);
+        if (bookId) {
+            getChapters();
+        }
+    }, []);
 
     const navigationHandler = (url, id) => {
         navigate(url);
-        setChapterCookie('__chapter_id', id);
+        localStorage.setItem('__material_id', id);
     };
 
     return (
@@ -60,15 +58,7 @@ const BookCover = () => {
                     <div>
                         {Chapters.map((chapter) => {
                             return (
-                                <div
-                                    key={chapter.id}
-                                    onClick={() =>
-                                        navigationHandler(
-                                            chapter.name.replace(/ /g, '-'),
-                                            chapter.id
-                                        )
-                                    }
-                                >
+                                <div key={chapter.id}>
                                     <div className={classes.chapterTitle}>
                                         <h2>{chapter.name}</h2>
                                     </div>
@@ -81,15 +71,15 @@ const BookCover = () => {
                                                             return (
                                                                 <div
                                                                     key={material.id}
-                                                                    // onClick={() =>
-                                                                    //     navigationHandler(
-                                                                    //         material.name.replace(
-                                                                    //             / /g,
-                                                                    //             '-'
-                                                                    //         ),
-                                                                    //         material.id
-                                                                    //     )
-                                                                    // }
+                                                                    onClick={() =>
+                                                                        navigationHandler(
+                                                                            material.name.replace(
+                                                                                / /g,
+                                                                                '-'
+                                                                            ),
+                                                                            material.id
+                                                                        )
+                                                                    }
                                                                 >
                                                                     <p>{material.name}</p>
                                                                 </div>

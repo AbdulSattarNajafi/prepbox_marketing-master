@@ -57,17 +57,22 @@
     align-items: center;
 }
 
+.materialList li {
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
 @media (max-width: 767.98px) {
     .chapterTitle h2 {
         font-size: 16px;
-    }    
+    }
 }
 
 @media (max-width: 575.98px) {
     .chapterTitle {
         padding: 10px;
     }
-    
+
     .materialWrapper {
         font-size: 14px;
         line-height: 24px;
@@ -76,7 +81,7 @@
     .chapterTextContainer {
         padding: 10px;
     }
-    
+
     .header {
         display: flex;
         justify-content: center;
