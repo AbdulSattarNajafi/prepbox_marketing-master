@@ -54,7 +54,7 @@
     width: auto;
     height: auto;
     height: 450px;
-    margin-top: 16px;
+    padding-top: 20px;
 }
 
 .post__error {
@@ -84,6 +84,10 @@
 .post__error button:hover {
     color: #398fe5;
     background-color: transparent;
+}
+
+.questionsTexts img {
+    display: none;
 }
 
 @media (max-width: 991.98px) {

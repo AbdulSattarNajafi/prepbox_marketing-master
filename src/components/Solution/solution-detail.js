@@ -11,6 +11,7 @@ const SolutionDetail = () => {
     const [solutions, setSolution] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
+    const [imageId, setImageId] = useState('');
 
     useEffect(() => {
         const getSolution = async () => {
@@ -36,6 +37,21 @@ const SolutionDetail = () => {
         getSolution();
     }, [questionId]);
 
+    useEffect(() => {
+        // Parse the HTML string
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(solutions.question_html, 'text/html');
+
+        // Find the image element and extract the src
+        const imageElement = doc.querySelector('img');
+        const imageSrc = imageElement ? imageElement.getAttribute('src') : '';
+
+        // Extract the image ID from the src
+        const imageId = imageSrc.substring(imageSrc.lastIndexOf('/') + 1);
+
+        setImageId(imageId);
+    }, [solutions.question_html]);
+
     return (
         <section className={classes.solution}>
             <div className={classes['solution-container']}>
@@ -47,8 +63,15 @@ const SolutionDetail = () => {
                         {solutions ? (
                             <div className={classes['solution-body']}>
                                 <div
+                                    className={classes.questionsTexts}
                                     dangerouslySetInnerHTML={{ __html: solutions.question_html }}
                                 ></div>
+                                {imageId && (
+                                    <img
+                                        src={`https://prepanywhere.s3.amazonaws.com/qimages/${imageId}-original.png`}
+                                        alt={solutions.question}
+                                    />
+                                )}
                                 {solutions.youtube_code && (
                                     <div className={classes['solution-video']}>
                                         <ReactPlayer
