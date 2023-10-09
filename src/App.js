@@ -28,8 +28,11 @@ const router = createBrowserRouter([
             { path: 'blog', element: <Blog /> },
             { path: 'worksheets', element: <Worksheet /> },
             { path: 'worksheets/:bookName', element: <BookLvl1 /> },
-            { path: 'worksheets/:bookName/:materialName', element: <Material /> },
-            { path: 'worksheets/:bookName/:materialName/:questionId', element: <SolutionDetail /> },
+            { path: 'worksheets/:bookName/:chapterName/:materialName', element: <Material /> },
+            {
+                path: 'worksheets/:bookName/:chapterName/:materialName/:questionId',
+                element: <SolutionDetail />,
+            },
 
             { path: 'support', element: <SupportPage /> },
             { path: 'product/prepbox-ai', element: <Tutorless /> },

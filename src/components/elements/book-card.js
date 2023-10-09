@@ -2,13 +2,12 @@ import { useNavigate } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import classes from './book-card.module.css';
 
-const BookCard = ({ name, image, id }) => {
+const BookCard = ({ name, commonName, image, id }) => {
     const navigate = useNavigate();
-    const nameURL = name.replace(/ /g, '-');
 
     const bookHandler = () => {
-        navigate(`${nameURL}`);
-        localStorage.setItem('__book_id', id);
+        navigate(commonName);
+        // localStorage.setItem('__book_id', id);
     };
 
     return (

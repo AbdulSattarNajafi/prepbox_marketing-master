@@ -12,13 +12,12 @@ const BookCover = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const bookId = localStorage.getItem('__book_id');
         const getChapters = async () => {
             try {
                 setIsLoading(true);
                 setError('');
                 const response = await axios.get(
-                    `https://app.prepanywhere.com/api/stu/static_books/all_chapters?id=${bookId}`
+                    `https://app.prepanywhere.com/api/stu/static_books/all_chapters?book_name=${bookName}`
                 );
                 setChapters(response.data);
             } catch (error) {
@@ -34,14 +33,11 @@ const BookCover = () => {
             }
         };
 
-        if (bookId) {
-            getChapters();
-        }
-    }, []);
+        getChapters();
+    }, [bookName]);
 
-    const navigationHandler = (url, id) => {
-        navigate(url);
-        localStorage.setItem('__material_id', id);
+    const navigationHandler = (chapterName, materialName) => {
+        navigate(`${chapterName}/${materialName}`);
     };
 
     return (
@@ -73,11 +69,8 @@ const BookCover = () => {
                                                                     key={material.id}
                                                                     onClick={() =>
                                                                         navigationHandler(
-                                                                            material.name.replace(
-                                                                                / /g,
-                                                                                '-'
-                                                                            ),
-                                                                            material.id
+                                                                            chapter.common_name,
+                                                                            material.common_name
                                                                         )
                                                                     }
                                                                 >

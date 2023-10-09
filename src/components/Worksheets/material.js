@@ -8,17 +8,16 @@ const MaterialPage = () => {
     const [Questions, setQuestions] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
-    const { materialName } = useParams();
+    const { bookName, chapterName, materialName } = useParams();
     const navigate = useNavigate();
 
     useEffect(() => {
-        const materialId = localStorage.getItem('__material_id');
         const getQuestions = async () => {
             try {
                 setIsLoading(true);
                 setError('');
                 const response = await axios.get(
-                    `https://app.prepanywhere.com/api/stu/static_books/all_questions?id=${materialId}`
+                    `https://app.prepanywhere.com/api/stu/static_books/all_questions?book_name=${bookName}&chapter_name=${chapterName}&material_name=${materialName}`
                 );
                 setQuestions(response.data);
             } catch (error) {
@@ -34,10 +33,8 @@ const MaterialPage = () => {
             }
         };
 
-        if (materialId) {
-            getQuestions();
-        }
-    }, []);
+        getQuestions();
+    }, [bookName, chapterName, materialName]);
 
     const questionNavigationHandler = (url) => {
         navigate(url);
@@ -46,7 +43,7 @@ const MaterialPage = () => {
     return (
         <div className={classes.section}>
             <div className={classes.header}>
-                <h3>{materialName.replace(/-/g, ' ')}</h3>
+                <h3>{materialName.replace('-', '.').replace(/-/g, ' ')}</h3>
             </div>
             <div className={classes.container}>
                 {isLoading && <Loader />}

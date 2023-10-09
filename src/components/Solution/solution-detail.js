@@ -4,10 +4,11 @@ import Loader from '../elements/loader';
 import classes from './solution-detail.module.css';
 import ReactPlayer from 'react-player';
 import axios from 'axios';
+import Latex from 'react-latex';
 
 const SolutionDetail = () => {
     const navigate = useNavigate();
-    const { questionId } = useParams();
+    const { bookName, materialName, questionId } = useParams();
     const [solutions, setSolution] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
@@ -21,7 +22,29 @@ const SolutionDetail = () => {
                 const response = await axios.get(
                     `https://app.prepanywhere.com/api/stu/static_books/question_details?id=${questionId}`
                 );
-                setSolution(response.data);
+                const data = response.data;
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(data?.question_html, 'text/html');
+
+                const imageElement = doc.querySelector('img');
+                const imageSrc = imageElement ? imageElement.getAttribute('src') : '';
+
+                const imageId = imageSrc.substring(imageSrc.lastIndexOf('/') + 1);
+
+                const isImageIdExist =
+                    data?.question?.slice(-(imageId.length + 1)) === `#${imageId}`;
+
+                const questionData = isImageIdExist
+                    ? data.question?.slice(0, -(imageId.length + 1))
+                    : data.question;
+
+                const solutionData = {
+                    ...data,
+                    question: questionData,
+                };
+
+                setSolution(solutionData);
+                setImageId(imageId);
             } catch (error) {
                 if (error.response) {
                     setError('No Data Found!');
@@ -37,21 +60,6 @@ const SolutionDetail = () => {
         getSolution();
     }, [questionId]);
 
-    useEffect(() => {
-        // Parse the HTML string
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(solutions.question_html, 'text/html');
-
-        // Find the image element and extract the src
-        const imageElement = doc.querySelector('img');
-        const imageSrc = imageElement ? imageElement.getAttribute('src') : '';
-
-        // Extract the image ID from the src
-        const imageId = imageSrc.substring(imageSrc.lastIndexOf('/') + 1);
-
-        setImageId(imageId);
-    }, [solutions.question_html]);
-
     return (
         <section className={classes.solution}>
             <div className={classes['solution-container']}>
@@ -62,10 +70,11 @@ const SolutionDetail = () => {
                     <div>
                         {solutions ? (
                             <div className={classes['solution-body']}>
-                                <div
-                                    className={classes.questionsTexts}
-                                    dangerouslySetInnerHTML={{ __html: solutions.question_html }}
-                                ></div>
+                                <h2>{bookName.replace(/-/g, ' ')}</h2>
+                                <h3>{materialName.replace('-', '.').replace(/-/g, ' ')}</h3>
+                                <div className={classes.questionsTexts}>
+                                    <Latex>{solutions.question}</Latex>
+                                </div>
                                 {imageId && (
                                     <img
                                         src={`https://prepanywhere.s3.amazonaws.com/qimages/${imageId}-original.png`}

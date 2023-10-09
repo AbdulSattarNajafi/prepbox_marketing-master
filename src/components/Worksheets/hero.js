@@ -49,8 +49,8 @@ const WorksheetHero = ({ books, isLoading, error }) => {
                             return (
                                 <BookCard
                                     key={book.id}
-                                    id={book.id}
                                     name={book.name}
+                                    commonName={book.common_name}
                                     image={book.cover_image}
                                 />
                             );
